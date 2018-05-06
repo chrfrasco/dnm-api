@@ -1,0 +1,36 @@
+{
+  "name": "dnm-api",
+  "version": "0.0.1",
+  "description": "API for the D&M directory",
+  "main": "index.js",
+  "repository": "https://github.com/chrfrasco/dnm-api",
+  "author": "Christian Scott <me@christianfscott.com>",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": "10.0.x"
+  },
+  "scripts": {
+    "start": "nodemon index.js",
+    "server": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-validator": "^5.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.5",
+    "nodemon": "^1.17.4",
+    "prettier": "^1.12.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint",
+      "git add"
+    ]
+  }
+}
