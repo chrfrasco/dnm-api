@@ -32,10 +32,17 @@ module.exports = [
     .isURL(),
 
   check("images")
-    .custom((value, { req }) => req.files != null && req.files.length > 0)
+    .custom(atLeastOneFile)
     .withMessage("must include at least one image")
-    .custom((value, { req }) =>
-      req.files.every(file => /(\.jpg)|(\.png)$/.test(file.originalname))
-    )
+    .custom(allFilesMatch(/(\.jpg)|(\.png)$/))
     .withMessage("images must be png or jpg")
 ];
+
+function atLeastOneFile(value, { req }) {
+  return req.files != null && req.files.length > 0;
+}
+
+function allFilesMatch(re) {
+  return (value, { req }) =>
+    req.files.every(file => re.test(file.originalname));
+}
