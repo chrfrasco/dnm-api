@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 5000;
 
   app.use(morgan("combined"));
 
-  const whitelist = process.env.WHITELIST.split(",");
+  const whitelistENV = process.env.WHITELIST;
+  const whitelist = whitelistENV 
+    ? whitelistENV.split(",")
+    : [];
   app.use((req, res, next) => {
     const origin = req.get("origin");
     if (whitelist.includes(origin)) {
