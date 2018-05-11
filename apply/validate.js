@@ -14,6 +14,8 @@ module.exports = [
     .trim()
     .normalizeEmail(),
 
+  check("bio").isLength({ min: 1 }).trim(),
+
   check("field").isIn([
     "hair designer",
     "make-up artist",
@@ -23,11 +25,29 @@ module.exports = [
     "art director"
   ]),
 
-  check("region").isAlpha(),
+  check("region").isIn([
+    "Auckland",
+    "Bay of Plenty",
+    "Canterbury",
+    "Chatham Islands",
+    "Gisborne",
+    "Hawke's Bay",
+    "Manawatu-Wanganui",
+    "Marlborough",
+    "Nelson",
+    "Northland",
+    "Otago",
+    "Southland",
+    "Taranaki",
+    "Tasman",
+    "Waikato",
+    "Wellington",
+    "West Coast"
+  ]),
 
   check("portfolio").isURL(),
 
-  check("social")
+  check("social-media")
     .isArray()
     .isURL(),
 
