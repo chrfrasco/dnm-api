@@ -1,29 +1,17 @@
 const nodemailer = require("nodemailer");
 
-module.exports.init = () =>
-  new Promise((resolve, reject) =>
-    nodemailer.createTestAccount((err, account) => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve(
-        nodemailer.createTransport({
-          host: account.smtp.host,
-          port: account.smtp.port,
-          secure: account.smtp.secure,
-          auth: {
-            user: account.user,
-            pass: account.pass
-          }
-        })
-      );
-    })
-  );
+module.exports.init = async () =>
+  nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
+    }
+  });
 
 module.exports.createMessage = ({ name, text, html, files }) => ({
-  from: `${name} <sender@example.com>`,
-  to: "Applications Manager <recipient@example.com>",
+  from: `${name} <${process.env.GMAIL_USER}>`,
+  to: `Applications Manager <${process.env.RECIPIENT}>`,
   subject: `New Application from ${name}`,
   attachments: files.map(file => ({
     content: file.buffer,
@@ -39,6 +27,7 @@ module.exports.sendMail = (transporter, message) =>
       if (err) {
         reject(err);
       }
-      resolve(nodemailer.getTestMessageUrl(info));
+
+      resolve(info);
     })
   );

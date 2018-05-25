@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
   const whitelist = whitelistENV 
     ? whitelistENV.split(",")
     : [];
+  console.log(whitelist);
   app.use((req, res, next) => {
     const origin = req.get("origin");
     if (whitelist.includes(origin)) {

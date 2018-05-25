@@ -1,5 +1,5 @@
 const renderLink = url => `<a href="${url}">${url}</a>`;
-const renderEmailLink = url => renderLink(`mailto:${url}`);
+const renderEmailLink = url =>`<a href="mailto:${url}">${url}</a>`;
 
 const emailText = submission => `
 Name: ${submission["first-name"]} ${submission["last-name"]}
